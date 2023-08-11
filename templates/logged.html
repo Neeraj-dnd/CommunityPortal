@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+    <div class="container">
+        <h1>Welcome..</h1>
+        <form id="loginForm" action="/get_users" method="GET">
+            <button type="submit">See all Users</button>
+        </form>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+<div class="container">
+    <h1>Signup</h1>
+    {% if msg %}
+    <p style="text-align: center; color: red;">{{ msg }}</p>
+    {% endif %}
+    <form id="loginForm" action="/signup" method='POST'>
+        <label for="username">Username:</label>
+        <input required type="text" id="username" name="username" placeholder="Enter your username">
+        <label for="password">Password:</label>
+        <input required type="password" id="password" name="password" placeholder="Enter your password">
+        <button type="submit">Signup</button>
+    </form>
+    <div class="toggle">
+        <p>Already have an account? <a methods="POST" href="/" id="login" >Login</a></p>
+    </div>
+</div>
+
+{% endblock %}

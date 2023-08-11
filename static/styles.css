@@ -1,0 +1,81 @@
+body {
+    display: flex;
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+.container {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: 400px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+label {
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="password"],
+button {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
+button:hover {
+    background-color: #0056b3;
+}
+.toggle {
+    text-align: center;
+    margin-top: 10px;
+}
+.toggle a {
+    text-decoration: none;
+    cursor: pointer;
+    color: #007bff;
+}
+
+table {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.home {
+    text-align: center;
+    margin-bottom: 10px;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+
+}
+.home a {
+    text-decoration: none;
+    cursor: pointer;
+    color: #007bff;
+}

@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+    <div class="container">
+        <h1>Users List</h1>
+        <table border="1px solid #ccc;">
+            <tr style="color: #0056b3">
+                <th>Id</th>
+                <th>Name</th>
+                <!-- Add more columns here -->
+            </tr>
+            {% for user in users %}
+            <tr>
+                <td>{{ user[0] }}</td>
+                <td>{{ user[1] }}</td>
+                <!-- Add more columns here -->
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+{% endblock %}
