@@ -91,7 +91,7 @@ def login():
             msg = 'Invalid credentials. Please try again.'
     return render_template('index.html', msg=msg)
 
-@app.route('/logged', methods=['POST'])
+@app.route('/logged', methods=['GET', 'POST'])
 def logged():
     return render_template('logged.html')
 
