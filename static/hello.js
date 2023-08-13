@@ -1,4 +1,3 @@
-console.log('Javascript: welcome..')
+console.log('Javascript: welcome to signup!');
 
-let signup = document.getElementById('signup');
-let loginForm = document.getElementById('loginForm');
+let signup = document.getElementById('Signup');

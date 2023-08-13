@@ -48,16 +48,19 @@ def signup():
         username = request.form.get('username')
         password = request.form.get('password')
         print(f'username: {username}, password: {password}')
-
+        if username == '' or password == '':
+            msg = 'Please fill both!'
+            return render_template('signup.html', msg=msg)
         cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
         query = "INSERT INTO login_info (userName, password) Values (%s, %s)"
         try:
-            cursor.execute('ALTER TABLE login_info AUTO_INCREMENT = 1')
-            cursor.execute(query, (username, password))
-            mysql.connection.commit()
-            cursor.close()
-            print('Signup successful!')
-            return render_template('logged.html')
+            if username and password:
+                cursor.execute('ALTER TABLE login_info AUTO_INCREMENT = 1')
+                cursor.execute(query, (username, password))
+                mysql.connection.commit()
+                cursor.close()
+                print('Signup successful!')
+                return render_template('logged.html')
         except MySQLdb.IntegrityError as e:
             mysql.connection.rollback()
             msg = 'Username already exists! Try Login'
