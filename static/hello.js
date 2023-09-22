@@ -1,3 +1,3 @@
 console.log('Javascript: welcome to signup!');
 
-let signup = document.getElementById('Signup');
+let username = document.getElementById('username');

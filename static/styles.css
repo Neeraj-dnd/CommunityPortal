@@ -7,26 +7,26 @@ body {
     align-items: center;
     justify-content: center;
     height: 100vh;
+    width: 100vw;
 }
 .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     background-color: #ffffff;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 30px;
-    width: 400px;
+    padding: 20px;
+    max-width: 400px;
+    width: 80%;
+    min-height: 300px;
+    gap: 20px;
 }
 
-h1 {
+h1, p {
+    margin: 0px;
     text-align: center;
-    margin-bottom: 20px;
-}
-
-p {
-    text-align: center;
-    margin-bottom: 20px;
-}
-label {
-    font-weight: bold;
 }
 
 input[type="text"],
@@ -35,9 +35,10 @@ button {
     width: 100%;
     box-sizing: border-box;
     padding: 10px;
-    margin-bottom: 20px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    margin-bottom: 10px;
+    background-color: #00000011;
 }
 
 button {
@@ -47,9 +48,11 @@ button {
     border: none;
     cursor: pointer;
 }
+
 button:hover {
     background-color: #0056b3;
 }
+
 .toggle {
     text-align: center;
     margin-top: 10px;
@@ -60,27 +63,34 @@ button:hover {
     color: #007bff;
 }
 
+/* Style the table */
 table {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 5px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    border: 1px solid #00000044; /* Add a bottom border to header cells */
+    border-collapse: collapse; /* Collapse table borders */
+    width: 100%; /* Make the table occupy 100% of its container */
+    margin-bottom: 20px; /* Add some spacing at the bottom of the table */
+    font-family: Arial, sans-serif; /* Specify a font */
+    font-size: 14px; /* Set the font size */
     text-align: center;
 }
 
-.home {
-    text-align: center;
-    margin-bottom: 10px;
-    position: fixed;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-
+/* Style table headers (th) */
+th {
+    background-color: #00000022; /* Set a background color */
+    text-weight: bold;
+    font-size: 16px;
+    padding: 8px; /* Add padding for spacing within header cells */
+    border: 1px solid #00000044; /* Add a bottom border to header cells */
 }
-.home a {
-    text-decoration: none;
-    cursor: pointer;
-    color: #007bff;
+
+/* Style table data cells (td) */
+td {
+    padding: 4px; /* Add padding for spacing within data cells */
+    border-bottom: 1px solid #ddd; /* Add a bottom border to data cells */
+    border: 1px solid #ddd; /* Add a bottom border to data cells */
+}
+
+/* Add alternating row colors for better readability */
+tr {
+    background-color: #00000011; /* Set an alternate background color for even rows */
 }
