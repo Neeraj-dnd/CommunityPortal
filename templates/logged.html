@@ -3,7 +3,7 @@
 {% block body %}
 
     <div class="container">
-        <h1>Welcome.. {% print(request.form.get('username')) %}</h1>
+        <h1>Welcome.. {% print(session.get('username')) %}</h1>
         <p>This is BACE<br>
             We are very thrilled to see you here.
         </p>
@@ -11,6 +11,7 @@
             <img width="300" alt="WelcomeToBace" src="/static/WelcomeToBace.jpg">
         </div>
         <form id="loginForm" action="/get_users" method="GET">
+            <button formaction="/logout" type="submit">log out</button>
             <button type="submit">See all Users</button>
         </form>
     </div>
