@@ -1,0 +1,217 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+$gray: #333533;
+$black: #202020;
+$white: #fff;
+
+
+body {
+    width: 100vw;
+    min-height: 100vh;
+    height: fit-content;
+    margin: 0px;
+    padding: 0px;
+    box-siz
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    height: fit-content;
+    padding-bottom: 50px;
+}
+
+.card-registration .select-input.form-control[readonly]:not([disabled]) {
+    font-size: 1rem;
+    line-height: 2.15;
+    padding-left: .75em;
+    padding-right: .75em;
+}
+
+#nav-buttons {
+    display: flex;
+}
+
+#path, #user {
+    display: flex;
+    flex-basis: 33%;
+    gap: 2px;
+}
+
+#main_title {
+    display: flex;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+#user {
+    display: flex;
+    justify-content: right;
+    gap: 2.5%;
+}
+
+.card-registration .select-arrow {
+    top: 13px;
+}
+
+.row {
+    justify-content: center;
+    margin: 0px;
+    padding: 0px;
+    min-width: fit-content;
+    width: 100%
+}
+
+#post {
+    background-color: #fff;
+    max-width: 500px;
+    width: 100%;
+    padding: 2%;
+    border-radius: 20px;
+    margin: 20px;
+}
+
+.input-group {
+    margin: 10px 0px;
+}
+
+input, textarea {
+    width: 100%;
+    height: 45px;
+    padding: 15px;
+    font-size: 15px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    border: 1px solid #fff;
+    background-color: #fff;
+    box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
+}
+
+textarea {
+    height: 90px;
+    resize: vertical;
+}
+
+button {
+    background-color: #000;
+    color: #fff;
+    padding: 8px 40px;
+    border: 1px solid red;
+    border-color: transparent;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    transition: box-shadow 0.3s ease;
+}
+
+button:hover {
+    color: black;
+    background-color: white;
+    border: 1px solid grey;
+    box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+}
+
+
+#contact {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+#contact-title {
+    letter-spacing: 1.5px;
+    color: $black;
+    font-size: 2rem;
+}
+
+#contact-body {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid white;
+    align-items: left;
+    width: 600px;
+    height: 100%;
+    background: #fff;
+    border-radius: 20px;
+    padding: 0.5vw 0;
+    gap: 5px;
+    box-shadow: 0px 0px 10px 5px #eeeeee;
+}
+
+
+#contact-name {
+  color: $black;
+  font-size: 1.6rem;
+}
+
+.contact-desc {
+  color: $gray;
+  font-size: 1rem;
+  text-align: left;
+  padding: 0 25px;
+}
+
+#post-title {
+    padding: 0 25px;
+    margin: 0;
+}
+
+#user_info {
+    padding: 0 5px;
+    margin: 5px 5px;
+    Border-bottom: 1px solid #0003;
+}
+
+#contact-background {
+  border-radius: 10px;
+  width: 100%;
+  height: auto;
+
+}
+
+#contact-pp {
+  z-index: 999;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 3px solid $gray;
+}
+
+.contact-social {
+  margin: 0;
+  padding: 1%;
+  width: 100%;
+  height: 5vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+}
+
+.socials {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 25px;
+  flex-wrap: nowrap;
+}
+
+#user_info {
+
+}
+
+
+@media (max-width: 500px) {
+  width: 80vw;
+}
+

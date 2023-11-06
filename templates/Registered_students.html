@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Registered Students</title>
+    <link href="/static/style1.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="data">
+        <h1>Registered Students List</h1>
+        <table>
+            <tr style="color: #0056b3">
+                <th>Id</th>
+                <th>Name</th>
+                <th>Father</th>
+                <th>Mother</th>
+                <th>Address</th>
+                <th>State</th>
+                <th>City</th>
+                <th>Gender</th>
+                <th>Dob</th>
+                <th>Pincode</th>
+                <th>Email</th>
+                <th>Update</th>
+                <th>De-register</th>
+            </tr>
+            {% for student in Students_data %}
+            <tr>
+                <td>{{ student[0] }}</td>
+                <td>{{ student[1] }} {{ student[2] }}</td>
+                <td>{{ student[3] }}</td>
+                <td>{{ student[4] }}</td>
+                <td>{{ student[5] }}</td>
+                <td>{{ student[6] }}</td>
+                <td>{{ student[7] }}</td>
+                <td>{{ student[8] }}</td>
+                <td>{{ student[9] }}</td>
+                <td>{{ student[10] }}</td>
+                <td>{{ student[11] }}</td>
+                <td><form><button class="btn btn-light btn-lg" formaction="/students/edit/{{ student[0] }}" name="update">Update</button></form></td>
+                <td><form><button class="btn btn-light btn-lg" formaction="/students/delete/{{ student[0] }}" name="de-register">De-register</button></form></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>

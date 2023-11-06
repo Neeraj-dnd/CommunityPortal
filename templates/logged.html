@@ -8,11 +8,12 @@
             We are very thrilled to see you here.
         </p>
         <div id="img">
-            <img width="300" alt="WelcomeToBace" src="/static/WelcomeToBace.jpg">
+            <img width="280" alt="WelcomeToBace" src="/static/WelcomeToBace.jpg">
         </div>
-        <form id="loginForm" action="/get_users" method="GET">
+        <form method="GET">
             <button formaction="/logout" type="submit">log out</button>
-            <button type="submit">See all Users</button>
+            <button formaction="/get_users" type="submit">See all Candidates</button>
+            <button formaction="/fill_form" type="submit">Fill Form</button>
         </form>
     </div>
 

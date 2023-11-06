@@ -1,0 +1,68 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #3A4853;
+    align-items: center;
+    width: 100vw;
+    margin: 0px;
+    padding: 0px;
+}
+
+.data {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffffBB;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 90%;
+    min-height: 300px;
+    gap: 20px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+h1, p {
+    margin: 0px;
+    text-align: center;
+}
+
+
+/* Style the table */
+table {
+    border: 1px solid #00000044; /* Add a bottom border to header cells */
+    border-collapse: collapse; /* Collapse table borders */
+    width: 100%; /* Make the table occupy 100% of its container */
+    margin-bottom: 20px; /* Add some spacing at the bottom of the table */
+    font-family: Arial, sans-serif; /* Specify a font */
+    font-size: 14px; /* Set the font size */
+    text-align: center;
+}
+
+/* Style table headers (th) */
+th {
+    background-color: #00000022; /* Set a background color */
+    text-weight: bold;
+    font-size: 16px;
+    padding: 8px; /* Add padding for spacing within header cells */
+    border: 1px solid #00000044; /* Add a bottom border to header cells */
+}
+
+/* Style table data cells (td) */
+td {
+    padding: 4px; /* Add padding for spacing within data cells */
+    border-bottom: 1px solid #ddd; /* Add a bottom border to data cells */
+    border: 1px solid #00000044; /* Add a bottom border to data cells */
+}
+
+/* Add alternating row colors for better readability */
+tr {
+    background-color: #00000011; /* Set an alternate background color for even rows */
+}
+
+button {
+    cursor: pointer;
+}
