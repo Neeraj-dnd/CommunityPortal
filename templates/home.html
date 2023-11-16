@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Student Community App</title>
+    <title>CommunityPortal</title>
     <!-- Font Awesome -->
 	<link
 	  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
@@ -34,11 +34,11 @@
                   <div class="breadcrumb-item active" aria-current="page">{% print(session.get('username')) %}</div>
                 </div>
                 <div id="main_title">
-                  <div>Student Community</div>
+                  <div>CommunityPortal</div>
                 </div>
                 <div id="user">
                   <div id="profile"><a href="/profile">Profile</a></div>
-                  <div id='logout'><a href="/logout">Log out</a></div>
+                  <div id='logout'><a href="/logout" onclick="return confirm('Are you sure?')">Log out</a></div>
                 </div>
               </div>
             </nav>
@@ -55,11 +55,11 @@
           <div id="contact-body">
             <div id="user_info">
                 <img id="contact-pp" src="/uploads/profile-placeholder.jpg" alt="Profile image" />
-                <span id="contact-name">{{ post[1] }}</span>
+                <span id="contact-name">{{ post[5] }}</span>
             </div>
             <h4 id="post-title">{{ post[2] }}</h4>
             <p class="contact-desc">{{ post[3] }}</p>
-            <img id="contact-background" src="/uploads/{{post[4]}}" alt="{{ post[4] }}" />
+            <img id="post-media" src="/uploads/{{post[4]}}" alt="{{ post[4] }}"/>
             <div class="contact-social">
               <div class="socials">
                 <div class="contact-social">

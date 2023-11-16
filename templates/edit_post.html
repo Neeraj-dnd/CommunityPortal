@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Student Community App</title>
+    <!-- Font Awesome -->
+	<link
+	  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+	  rel="stylesheet"
+	/>
+	<!-- Google Fonts -->
+	<link
+	  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+	  rel="stylesheet"
+	/>
+	<!-- MDB -->
+	<link
+	  href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.css"
+	  rel="stylesheet"
+	/>
+    <link href="/static/mdb.min.css" rel="stylesheet" />
+    <link href="/static/style.css" rel="stylesheet" />
+</head>
+<body>
+    <section style="background-color: #f2f2f2;">
+      <div class="container py-5">
+        <div class="row">
+          <div class="col">
+            <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+              <div id="nav-buttons">
+                <div id="path">
+                  <div class="breadcrumb-item"><a href="/logged">Home</a></div>
+                  <div class="breadcrumb-item active" aria-current="page">{% print(session.get('username')) %}</div>
+                </div>
+                <div id="main_title">
+                  <div>Student Community</div>
+                </div>
+                <div id="user">
+                  <div id="profile"><a href="/profile">Profile</a></div>
+                  <div id='logout'><a href="/logout">Log out</a></div>
+                </div>
+              </div>
+            </nav>
+          </div>
+        </div>
+        <div class="row">
+           <div id="post">
+                <form id="add_post" method="POST" enctype="multipart/form-data">
+                    <input type="text" id="title" value="{{ post_data['title'] }}" required name="title" placeholder="Title" />
+                    <textarea id="post_description" placeholder="Description" name="post_description" rows="4" required>{{ post_data['post_description'] }}</textarea>
+                    <!-- Display current image -->
+                    <img id='post-media' src="/uploads/{{ post_data['image_name'] }}" alt="Current Image">
+                    <input type="file" id="image" name="image_name" accept="image/*">
+                    <button type="submit" class="btn btn-primary" formaction="/profile/update_post/{{ post_data['postId'] }}">Update Post</button>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <form class="d-flex justify-content-center mb-2" method="post">
+              <button type="submit" class="btn btn-primary" formaction="/logged">Home</button>
+              <button type="submit" class="btn btn-outline-primary ms-1" formaction="/logged">Cancel</button>
+            </form>
+        </div>
+      </div>
+    </section>
+    <!-- MDB -->
+	<script
+	  type="text/javascript"
+	  src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.js"
+	></script>
+    <script type="javascript" src="/static/mdb.min.js"></script>
+</body>
+</html>

@@ -5,6 +5,8 @@ from flask_mysqldb import MySQL
 import MySQLdb.cursors
 from flask_login import LoginManager, login_user, UserMixin
 import bcrypt
+from werkzeug.utils import secure_filename
+import os
 
 # Configure app
 app = Flask(__name__)
@@ -136,6 +138,7 @@ def login():
                 user.username = user_data['userName']
                 login_user(user)
                 session['username'] = request.form.get("username")
+                session['Id'] = user_data['Id']
                 return redirect('/logged')
             else:
                 msg = 'Invalid password. Please try again.'
@@ -162,8 +165,14 @@ def logged():
     print('logged in with:', session.get('username'))
 
     cursor = Mysql.connection.cursor()
-    cursor.execute("SELECT * FROM user_posts")
-    posts = reversed(cursor.fetchall())
+    cursor.execute("""
+        SELECT user_posts.*, login_info.userName
+        FROM user_posts
+        JOIN login_info ON user_posts.userId = login_info.Id
+        ORDER BY user_posts.postId DESC
+    """)
+    posts = cursor.fetchall()
+    print(f'posts are \n>> {posts}')
     cursor.close()
     return render_template('home.html', posts=posts)
 
@@ -175,7 +184,20 @@ def profile():
         print('\n-> inside if')
         return redirect("/login")
     print('profile of:', session.get('username'))
-    return render_template('user.html')
+
+    cursor = Mysql.connection.cursor()
+    cursor.execute("""
+        SELECT user_posts.*, login_info.userName
+        FROM user_posts 
+        JOIN login_info ON user_posts.userId = login_info.Id
+        WHERE userId = %s
+        ORDER BY user_posts.postId DESC
+    """, (session.get('Id'),))
+    self_posts = cursor.fetchall()
+    cursor.close()
+    print(f'self posts: {self_posts}')
+
+    return render_template('profile.html', self_posts=self_posts)
 
 
 @app.route('/add_post', methods=['GET', 'POST'])
@@ -232,6 +254,99 @@ def uploaded_file(filename):
     return send_from_directory('uploads', filename)
 
 
+@app.route("/profile/delete/<int:id>", methods=['GET', 'POST'])
+def delete_post(id):
+    print(f'\nDeleting.. post {id}\n')
+    cursor = Mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    try:
+        # Retrieve the image name before deleting the post
+        cursor.execute("SELECT image_name FROM user_posts WHERE postId=%s", (id,))
+        image_name = cursor.fetchone().get('image_name')
+
+        # Delete the post from the database
+        cursor.execute("DELETE FROM user_posts WHERE postId=%s", (id,))
+        Mysql.connection.commit()
+
+        # Delete the associated image from the 'uploads' folder
+        if image_name:
+            image_path = os.path.join('uploads', image_name)
+            if os.path.exists(image_path):
+                os.remove(image_path)
+
+    except Exception as e:
+        print(f"Error deleting post: {e}")
+    finally:
+        cursor.close()
+
+    return redirect("/profile")
+
+
+
+@app.route("/profile/edit/<int:id>", methods=['GET', 'POST'])
+def edit_post(id):
+    print(f'\nEdit.. post {id}\n')
+    cursor = Mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute("SELECT * FROM user_posts WHERE postId=%s", (id,))
+    post_data = cursor.fetchone()
+    print(f'post_data: {post_data}')
+    cursor.close()
+    return render_template('edit_post.html', post_data=post_data)
+
+
+@app.route('/profile/update_post/<int:id>', methods=['GET', 'POST'])
+def update_post(id):
+    print('\n-> updating post')
+    if 'username' not in session:
+        return redirect("/login")
+    print(session.get('username'), 'is updating post.')
+
+    if request.method == 'POST':
+        print("inside updating post")
+        postId = id
+        title = request.form['title']
+        post_description = request.form['post_description']
+        image = request.files['image_name']
+
+        # Check if a new image is provided
+        if image.filename != '':
+            # Save the uploaded image to a specific directory, e.g., 'uploads'
+            image_filename = secure_filename(image.filename)
+            image.save('uploads/' + image_filename)
+            image_name = image_filename
+
+            # If no new image is provided, retain the existing image name
+            cursor = Mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+            cursor.execute("SELECT image_name FROM user_posts WHERE postId = %s", (postId,))
+            existing_image_name = cursor.fetchone()['image_name']
+            cursor.close()
+
+            # Delete the previous image from the 'uploads' folder
+            if existing_image_name:
+                existing_image_path = os.path.join('uploads', existing_image_name)
+                if os.path.exists(existing_image_path):
+                    os.remove(existing_image_path)
+        else:
+            # If no new image is provided, retain the existing image name
+            cursor = Mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+            cursor.execute("SELECT image_name FROM user_posts WHERE postId = %s", (postId,))
+            existing_image_name = cursor.fetchone()['image_name']
+            cursor.close()
+            image_name = existing_image_name
+
+        cursor = Mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cursor.execute(
+            "UPDATE user_posts SET title=%s, post_description=%s, image_name=%s WHERE postId=%s",
+            (title, post_description, image_name, postId)
+        )
+        Mysql.connection.commit()
+        cursor.close()
+
+        flash('Post uploaded successfully', 'success')  # You can use flash messages for user feedback
+
+    return redirect('/profile')
+
+
+
 @app.route('/get_users', methods=['GET', 'POST'])
 def get_users():
     cur = Mysql.connection.cursor()
@@ -242,7 +357,7 @@ def get_users():
 
 
 @app.route('/fill_form', methods=['GET', 'POST'])
-def home():
+def form():
     return render_template('form.html')
 
 
@@ -273,7 +388,7 @@ def form_submit():
                 (first_name, last_name, father, mother, address, state, city, gender, dob, pincode, email))
             cnx.commit()
             print('Successfully Registered')
-            return render_template('user.html')
+            return render_template('profile.html')
     finally:
         print('some issue..')
 
@@ -303,7 +418,7 @@ def edit(id):
 
 @app.route("/students/delete/<int:id>", methods=['GET'])
 def delete(id):
-    print('Deleting...')
+    print('Deleting. student_data')
     Cursor.execute("DELETE FROM Registered_students WHERE id=%s", (id,))
     return redirect("/students/registered")
 
@@ -311,7 +426,7 @@ def delete(id):
 # update
 @app.route("/students/updateInfo", methods=['POST'])
 def update():
-    print('Updating...')
+    print('Updating. student_data')
     if request.method == 'POST':
         id = request.form['id']
         print("Inside update_form funtion...")
