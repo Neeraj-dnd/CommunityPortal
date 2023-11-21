@@ -15,13 +15,13 @@ body {
     height: fit-content;
     margin: 0px;
     padding: 0px;
-    box-siz
 }
 
 section {
     display: flex;
     flex-direction: column;
     height: fit-content;
+    padding-bottom: 40px;
 }
 
 .card-registration .select-input.form-control[readonly]:not([disabled]) {
